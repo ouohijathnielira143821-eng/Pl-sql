@@ -1,0 +1,45 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    V_DEPTNO NUMBER := &Enter_Dept_No;
+
+    NO_DEPT_FOUND EXCEPTION;
+
+    CURSOR C_EMP IS
+        SELECT EMPNO, ENAME, SAL, DEPTNO
+        FROM EMP
+        WHERE DEPTNO = V_DEPTNO;
+
+    V_COUNT NUMBER := 0;
+
+BEGIN
+
+    FOR R IN C_EMP LOOP
+
+        INSERT INTO EMP_BACKUP
+        VALUES (R.EMPNO, R.ENAME, R.SAL, R.DEPTNO);
+
+        V_COUNT := V_COUNT + 1;
+
+    END LOOP;
+
+    IF V_COUNT = 0 THEN
+        RAISE NO_DEPT_FOUND;
+    END IF;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE(
+        V_COUNT || ' employee record(s) inserted into EMP_BACKUP.'
+    );
+
+EXCEPTION
+
+    WHEN NO_DEPT_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE(
+            'No employee found for department ' || V_DEPTNO
+        );
+
+END;
+/

@@ -1,0 +1,42 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    V_NAME RESULT.NAME%TYPE;
+    V_SUB1 RESULT.SUB1%TYPE;
+    V_SUB2 RESULT.SUB2%TYPE;
+    V_SUB3 RESULT.SUB3%TYPE;
+    V_SUB4 RESULT.SUB4%TYPE;
+    V_SUB5 RESULT.SUB5%TYPE;
+    V_TOTAL RESULT.TOTAL%TYPE;
+    V_PER RESULT.PER%TYPE;
+    V_GRADE RESULT.GRADE%TYPE;
+
+BEGIN
+    V_NAME := '&Enter_Name';
+
+    SELECT SUB1, SUB2, SUB3, SUB4, SUB5,
+           TOTAL, PER, GRADE
+    INTO V_SUB1, V_SUB2, V_SUB3, V_SUB4, V_SUB5,
+         V_TOTAL, V_PER, V_GRADE
+    FROM RESULT
+    WHERE UPPER(NAME) = UPPER(V_NAME);
+
+    DBMS_OUTPUT.PUT_LINE('Student Name : ' || V_NAME);
+    DBMS_OUTPUT.PUT_LINE('Subject 1    : ' || V_SUB1);
+    DBMS_OUTPUT.PUT_LINE('Subject 2    : ' || V_SUB2);
+    DBMS_OUTPUT.PUT_LINE('Subject 3    : ' || V_SUB3);
+    DBMS_OUTPUT.PUT_LINE('Subject 4    : ' || V_SUB4);
+    DBMS_OUTPUT.PUT_LINE('Subject 5    : ' || V_SUB5);
+    DBMS_OUTPUT.PUT_LINE('Total        : ' || V_TOTAL);
+    DBMS_OUTPUT.PUT_LINE('Percentage   : ' || V_PER);
+    DBMS_OUTPUT.PUT_LINE('Grade        : ' || V_GRADE);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Student does not exist.');
+
+    WHEN TOO_MANY_ROWS THEN
+        DBMS_OUTPUT.PUT_LINE('More than one student found.');
+
+END;
+/
