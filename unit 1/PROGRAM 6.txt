@@ -1,0 +1,29 @@
+DECLARE
+    p_name    VARCHAR2(30);
+    qty       NUMBER;
+    price     NUMBER;
+    disc_per  NUMBER;
+    total     NUMBER;
+    disc_amt  NUMBER;
+    net_amt   NUMBER;
+BEGIN
+    -- Accept input from user
+    p_name   := '&Product_Name';
+    qty      := &Quantity;
+    price    := &Price;
+    disc_per := &Discount_Percentage;
+
+    -- Calculate total, discount and net amount
+    total := qty * price;
+    disc_amt := (total * disc_per) / 100;
+    net_amt := total - disc_amt;
+
+    -- Display results
+    DBMS_OUTPUT.PUT_LINE('Product Name      : ' || p_name);
+    DBMS_OUTPUT.PUT_LINE('Quantity          : ' || qty);
+    DBMS_OUTPUT.PUT_LINE('Price per Unit    : Rs. ' || price);
+    DBMS_OUTPUT.PUT_LINE('Total Amount      : Rs. ' || total);
+    DBMS_OUTPUT.PUT_LINE('Discount (' || disc_per || '%): Rs. ' || disc_amt);
+    DBMS_OUTPUT.PUT_LINE('Net Amount        : Rs. ' || net_amt);
+END;
+/

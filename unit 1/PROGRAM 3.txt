@@ -1,0 +1,36 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_product_name   VARCHAR2(50);
+    v_qty            NUMBER;
+    v_price          NUMBER;
+    v_discount_per   NUMBER;
+    v_total          NUMBER;
+    v_discount_rs    NUMBER;
+    v_final_amount   NUMBER;
+BEGIN
+    -- Accept input from user
+    v_product_name := '&Enter_Product_Name';
+    v_qty := &Enter_Quantity;
+    v_price := &Enter_Price;
+    v_discount_per := &Enter_Discount_Percentage;
+
+    -- Calculate total amount
+    v_total := v_qty * v_price;
+
+    -- Calculate discount in Rs.
+    v_discount_rs := (v_total * v_discount_per) / 100;
+
+    -- Calculate final amount
+    v_final_amount := v_total - v_discount_rs;
+
+    -- Display output
+    DBMS_OUTPUT.PUT_LINE('Product Name     : ' || v_product_name);
+    DBMS_OUTPUT.PUT_LINE('Quantity         : ' || v_qty);
+    DBMS_OUTPUT.PUT_LINE('Price per Unit   : Rs. ' || v_price);
+    DBMS_OUTPUT.PUT_LINE('Total Amount     : Rs. ' || v_total);
+    DBMS_OUTPUT.PUT_LINE('Discount         : ' || v_discount_per || '%');
+    DBMS_OUTPUT.PUT_LINE('Discount Amount  : Rs. ' || v_discount_rs);
+    DBMS_OUTPUT.PUT_LINE('Final Amount     : Rs. ' || v_final_amount);
+END;
+/

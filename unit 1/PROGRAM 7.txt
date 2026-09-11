@@ -1,0 +1,22 @@
+
+DECLARE
+    feet   NUMBER;
+    cm     NUMBER;
+    inch   NUMBER;
+    meter  NUMBER;
+BEGIN
+    -- Accept input from user
+    feet := &Feet;
+
+    -- Conversion
+    inch := feet * 12;
+    cm := feet * 30.48;
+    meter := feet * 0.3048;
+
+    -- Display results
+    DBMS_OUTPUT.PUT_LINE('Feet        : ' || feet);
+    DBMS_OUTPUT.PUT_LINE('Inches      : ' || inch);
+    DBMS_OUTPUT.PUT_LINE('Centimeters : ' || cm);
+    DBMS_OUTPUT.PUT_LINE('Meters      : ' || meter);
+END;
+/

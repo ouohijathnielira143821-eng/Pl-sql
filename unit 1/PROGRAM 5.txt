@@ -1,0 +1,14 @@
+DECLARE
+    principal NUMBER := 10000;
+    rate      NUMBER := 8;
+    years     NUMBER := 3;
+    si         NUMBER;
+BEGIN
+    si := (principal * rate * years) / 100;
+
+    DBMS_OUTPUT.PUT_LINE('Principal Amount : ' || principal);
+    DBMS_OUTPUT.PUT_LINE('Rate of Interest : ' || rate || '%');
+    DBMS_OUTPUT.PUT_LINE('Number of Years  : ' || years);
+    DBMS_OUTPUT.PUT_LINE('Simple Interest  : ' || si);
+END;
+/
