@@ -1,0 +1,24 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_count NUMBER;
+BEGIN
+    UPDATE EMPLOYEE
+    SET SALARY = SALARY * 1.10
+    WHERE DEPTNO = 10;
+
+    v_count := SQL%ROWCOUNT;
+
+    IF v_count > 0 THEN
+        DBMS_OUTPUT.PUT_LINE(
+            v_count || ' employee(s) updated successfully.'
+        );
+    ELSE
+        DBMS_OUTPUT.PUT_LINE(
+            'No employees found in department 10.'
+        );
+    END IF;
+
+    COMMIT;
+END;
+/

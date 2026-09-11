@@ -1,0 +1,39 @@
+DECLARE
+    CURSOR c_emp (p_deptno EMP.DEPTNO%TYPE) IS
+        SELECT ENAME, DEPTNO, SAL
+        FROM EMP
+        WHERE DEPTNO = p_deptno;
+
+    CURSOR c_dept IS
+        SELECT DISTINCT DEPTNO
+        FROM EMP
+        ORDER BY DEPTNO;
+
+    v_total NUMBER;
+BEGIN
+    FOR d IN c_dept
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            'Department: ' || d.DEPTNO
+        );
+
+        v_total := 0;
+
+        FOR e IN c_emp(d.DEPTNO)
+        LOOP
+            DBMS_OUTPUT.PUT_LINE(
+                'Employee: ' || e.ENAME ||
+                ' | Salary: ' || e.SAL
+            );
+
+            v_total := v_total + e.SAL;
+        END LOOP;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Department Total Gross Salary: ' || v_total
+        );
+
+        DBMS_OUTPUT.PUT_LINE('-----------------------------');
+    END LOOP;
+END;
+/

@@ -1,0 +1,17 @@
+DECLARE
+    CURSOR c_emp IS
+        SELECT ENAME, DEPTNO, SAL
+        FROM EMP
+        ORDER BY SAL DESC;
+
+BEGIN
+    FOR rec IN c_emp
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            'Name: ' || rec.ENAME ||
+            ' | Department: ' || rec.DEPTNO ||
+            ' | Salary: ' || rec.SAL
+        );
+    END LOOP;
+END;
+/

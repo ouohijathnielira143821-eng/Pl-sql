@@ -1,0 +1,14 @@
+BEGIN
+    FOR rec IN (
+        SELECT ENAME, SAL
+        FROM EMP
+        WHERE ENAME LIKE 'A%'
+    )
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(
+            'Name: ' || rec.ENAME ||
+            ' | Salary: ' || rec.SAL
+        );
+    END LOOP;
+END;
+/
